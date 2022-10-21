@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+
+
+
+
+Composite -up-> User
+Project-up-|>Composite
+Tasks -up-|> Composite
+Project"1"*--->"0..n"Composite
+Tasks<--Interval
+
+package java.util{
+Observable o--up->Observer : Observers*
+}
+Clock---|>Observable
+Interval..|>Observer
+class User{
+    -Project[] : Project
+    +main()
+}
+Interface Observer{
+    +update(arg0 : Observable, arg1 : Object)
+}
+Abstract Observable{
+    +addObserver(ob : Observer)
+    +deleteObserver(ob : Observer)
+    +setChanged()
+    +notifyObservers(arg0 : Observable, arg1 : Object)
+
+}
+class Project {
+    -Composites[] : Composite
+
+    +Project(name : String)
+    +TotalTime() : DateTimeFormater
+    +addComposite(t : Composite)
+    +removeComposite(t : Composite)
+}
+class Tasks{
+    -Interval[] : Interval
+    -initD : DateTimeFormater
+    -finalD : DateTimeFormater
+
+
+    +Tasks(name : String)
+    +TotalTime() : DateTimeFormater
+    +getInitD() : DateTimeFormater
+    +getFinalD() : DateTimeFormater
+}
+
+abstract Composite{
+    -name : String
+
+
+    +Composite(name : String)
+    +TotalTime() : DateTimeFormater
+    +getName() : String
+}
+class Interval{
+    -initD : DateTimeFormater
+    -finalD : DateTimeFormater
+
+    +Interval(initD : DateTimeFormater, finalD : DateTimeFormater)
+    +getInitD() : DateTimeFormater
+    +getFinalD() : DateTimeFormater
+}
+class Clock{
+    -timer : Timer
+    -dateTime : DateTime
+    +startTimer()
+    -tick()
+}
+
+
+@enduml
