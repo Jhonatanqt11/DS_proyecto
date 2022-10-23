@@ -1,3 +1,4 @@
+import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Composite {
@@ -7,7 +8,7 @@ public abstract class Composite {
     super();
     this.name = name;
   }
-  public abstract DateTimeFormatter TotalTime();
+  public abstract Duration TotalTime();
   public String getName(){
     return name;
   }
