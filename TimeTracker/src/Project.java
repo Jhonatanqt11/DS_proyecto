@@ -1,8 +1,11 @@
 import java.time.format.DateTimeFormatter;
-public class Project {
+public class Project extends Composite {
   private String name;
 
-  public Project(String n);
+  public Project(String n)
+  {
+    super(n);
+  }
 
   public DateTimeFormatter TotalTime(){
 
