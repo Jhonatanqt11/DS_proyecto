@@ -14,18 +14,14 @@ public class Project extends Composite {
 
   public Duration TotalTime() {
 
+    Duration tempsTotal = Duration.ZERO;
+
     for(int i=0; i<Composites.size(); i++)
     {
-
-      if(Composites.get(i).esTask())
-      {
-
-      }
-      else
-      {
-
-      }
+      tempsTotal = tempsTotal.plus(Composites.get(i).TotalTime());
     }
+
+    return tempsTotal;
   }
 
   public void addComposite(Composite t) {
