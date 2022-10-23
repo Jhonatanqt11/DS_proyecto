@@ -1,13 +1,14 @@
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Interval {
-  private DateTimeFormatter initD;
-  private DateTimeFormatter finalD;
+  private LocalDateTime initD;
+  private LocalDateTime finalD;
 
-  public Interval(DateTimeFormatter init, DateTimeFormatter fin){
+  public Interval(LocalDateTime init, LocalDateTime fin){
     initD=init;
     finalD = fin;
   }
-  public DateTimeFormatter getInitD() {return initD;}
-  public DateTimeFormatter getFinalD() {return finalD;}
+  public LocalDateTime getInitD() {return initD;}
+  public LocalDateTime getFinalD() {return finalD;}
 }
