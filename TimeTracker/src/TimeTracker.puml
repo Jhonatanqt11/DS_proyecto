@@ -49,6 +49,7 @@ class Tasks{
     +TotalTime() : DateTimeFormater
     +getInitD() : DateTimeFormater
     +getFinalD() : DateTimeFormater
+    +addInterval(i : Interval) : void
 }
 
 abstract Composite{
