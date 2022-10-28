@@ -45,8 +45,8 @@ abstract Activity{
     +TotalTime() : DateTime
 }
 class Interval{
-    -initD : DateTime
-    -finalD : DateTime
+    -initialDate : DateTime
+    -finalDate : DateTime
     -duration : Duration
 
     +update(observable : Observable, obj : Object)
