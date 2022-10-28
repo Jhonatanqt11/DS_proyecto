@@ -6,21 +6,17 @@ skinparam classAttributeIconSize 0
 
 
 
-Composite -up-> User
-Project-up-|>Composite
-Tasks -up-|> Composite
-Project"1"*--->"0..n"Composite
-Tasks<--Interval
+Project-up-|>Activitat
+Task -up-|> Activitat
+Project"1"*--->"*"Activitat
+Task"1"-->"*"Interval
 
 package java.util{
 Observable o--up->Observer : Observers*
 }
 Clock---|>Observable
 Interval..|>Observer
-class User{
-    -Project[] : Project
-    +main()
-}
+
 Interface Observer{
     +update(arg0 : Observable, arg1 : Object)
 }
@@ -32,31 +28,29 @@ Abstract Observable{
 
 }
 class Project {
-    -Composites[] : Composite
+    -Activitats[] : Activitat
 
     +Project(name : String)
     +TotalTime() : DateTimeFormater
-    +addComposite(t : Composite)
-    +removeComposite(t : Composite)
+    +addActivitat(t : Activitat)
+    +removeActivitat(t : Activitat)
 }
-class Tasks{
+class Task{
     -Interval[] : Interval
     -initD : DateTimeFormater
     -finalD : DateTimeFormater
 
 
-    +Tasks(name : String)
+    +Task(name : String)
     +TotalTime() : DateTimeFormater
-    +getInitD() : DateTimeFormater
-    +getFinalD() : DateTimeFormater
     +addInterval(i : Interval) : void
 }
 
-abstract Composite{
-    -name : String
+abstract Activitat{
+    #name : String
+    #project : Project
 
-
-    +Composite(name : String)
+    +Activitat(name : String)
     +TotalTime() : DateTimeFormater
     +getName() : String
 }
@@ -67,6 +61,7 @@ class Interval{
     +Interval(initD : DateTimeFormater, finalD : DateTimeFormater)
     +getInitD() : DateTimeFormater
     +getFinalD() : DateTimeFormater
+    +update()
 }
 class Clock{
     -timer : Timer
