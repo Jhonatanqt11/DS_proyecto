@@ -48,7 +48,7 @@ public class Clock extends Observable {
     return time;
   }
 
-  public void stopTimer()
+  public synchronized void stopTimer()
   {
     timer.cancel();
     timer.purge();

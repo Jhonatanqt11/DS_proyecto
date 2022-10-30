@@ -4,6 +4,10 @@ public class main {
     t0.start();
     Thread.sleep(2000);
     t0.stop("study");
+    Task t1 = new Task("muñoz");
+    t1.start();
+    Thread.sleep(6000);
+    t1.stop("muñoz");
   }
  //private static void notSoSimpleTest() { ... }
   public static void main(String[] args) {
