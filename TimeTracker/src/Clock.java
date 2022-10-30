@@ -7,22 +7,22 @@ import java.util.TimerTask;
 
 public class Clock extends Observable {
   private LocalDateTime time;
-  private static Clock instance;
+  private static Clock instance = null;
   private Timer timer;
 
-  public Clock getInstance(){
+  public static Clock getInstance(){
     if (instance == null)
       instance = new Clock();
     return instance;
   }
 
-  /*
+
   private Clock()
   {
-    time = LocalDateTime;
-    lDateTime.now().minusSeconds(2); //  Consequently we have to set the new interval duration to 2 seconds the initial date-time to 2 seconds before the first signal received
+    time = LocalDateTime.now().minusSeconds(2);
+    timer = new Timer();//  Consequently we have to set the new interval duration to 2 seconds the initial date-time to 2 seconds before the first signal receive
   }
-   */
+
 
   private void tick(){
     time = LocalDateTime.now();
@@ -34,7 +34,7 @@ public class Clock extends Observable {
     TimerTask timerTask = new TimerTask() {
       @Override
       public void run() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
         String timeString = time.format(formatter);
         System.out.println(timeString);
         tick();

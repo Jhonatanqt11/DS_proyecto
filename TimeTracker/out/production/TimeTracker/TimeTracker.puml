@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+
+Project"activities 0..*"-up-|>"father 0,1"Activity
+Task -up-|>Activity
+Project*--->Activity
+Task"task 1"*-->"intervals 0..*"Interval
+
+package java.util{
+Observable o--up->Observer : Observers*
+}
+Clock---|>Observable
+Interval..|>Observer
+
+Interface Observer{
+    +update(observable : Observable, obj : Object)
+}
+Abstract Observable{
+    +addObserver(observer : Observer)
+    +setChanged()
+    +notifyObservers()
+
+}
+class Project {
+    -Activities[] : Activity[0..*]
+
+    +TotalTime() : DateTime
+    +addActivity(t : Activity)
+    +removeActivity(t : Activity)
+}
+class Task{
+    +TotalTime() : DateTime
+    +start() : void
+}
+
+abstract Activity{
+    #name : String
+    #father : Project {0..1}
+    #initialDate : DateTime
+    #finalDate : DateTime
+    #duration : Int
+
+    +TotalTime() : DateTime
+}
+class Interval{
+    -initialDate : DateTime
+    -finalDate : DateTime
+    -duration : Duration
+}
+class Clock{
+    -timer : Timer
+    -dateTime : DateTime
+    +startTimer()
+    +stopTimer()
+    -tick()
+}
+
+
+@enduml

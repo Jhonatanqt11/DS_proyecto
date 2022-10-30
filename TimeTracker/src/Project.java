@@ -21,11 +21,11 @@ public class Project extends Activity {
     return tempsTotal;
   }
 
-  public void addComposite(Activity t) {
+  public void addActivity(Activity t) {
     Composites.add(t);
   }
 
-  public boolean removeComposite(Activity t) {
+  public boolean removeActivity(Activity t) {
     return Composites.remove(t);
     //Intento de if(*eliminado*) return true, if(*no eliminado*) return false
   }

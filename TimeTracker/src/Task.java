@@ -27,10 +27,15 @@ public class Task extends Activity {
   public DateTimeFormatter getFinalD() {return finalD;}
   public void start(){
     Interval interval1 = new Interval(this);
-    Clock clock;
-    clock.getInstance().addObserver(interval1);
+    intervals.add(interval1);
+    Clock.getInstance().addObserver(interval1);
+    Clock.getInstance().startTimer();
     //crear thread
-
+  }
+  public void stop(String n){
+    if(name.equals(n)){
+      Clock.getInstance().stopTimer();
+    }
   }
 
 }

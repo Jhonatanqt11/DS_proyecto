@@ -1,7 +1,7 @@
 import java.time.Duration;
 
 public abstract class Activity {
-  private String name;
+  protected String name;
 
   public Activity(String name){
     super();
