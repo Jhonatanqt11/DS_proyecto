@@ -29,6 +29,7 @@ public class Clock extends Observable {
     setChanged();
     notifyObservers(this);
   }
+
   public void startTimer(){
     TimerTask timerTask = new TimerTask() {
       @Override
