@@ -32,7 +32,7 @@ class Project {
 }
 class Task{
     +TotalTime() : DateTime
-    +getIntervals() : Interval[0..*]
+    +start() : void
 }
 
 abstract Activity{
@@ -48,8 +48,6 @@ class Interval{
     -initialDate : DateTime
     -finalDate : DateTime
     -duration : Duration
-
-    +update(observable : Observable, obj : Object)
 }
 class Clock{
     -timer : Timer

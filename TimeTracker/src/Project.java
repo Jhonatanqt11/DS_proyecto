@@ -1,12 +1,9 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.time.Duration;
 
-public class Project extends Composite {
+public class Project extends Activity {
 
-  private List<Composite> Composites;
+  private List<Activity> Composites;
 
   public Project(String n) {
     super(n);
@@ -24,11 +21,11 @@ public class Project extends Composite {
     return tempsTotal;
   }
 
-  public void addComposite(Composite t) {
+  public void addComposite(Activity t) {
     Composites.add(t);
   }
 
-  public boolean removeComposite(Composite t) {
+  public boolean removeComposite(Activity t) {
     return Composites.remove(t);
     //Intento de if(*eliminado*) return true, if(*no eliminado*) return false
   }

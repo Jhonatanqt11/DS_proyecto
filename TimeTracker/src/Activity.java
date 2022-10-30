@@ -1,10 +1,9 @@
 import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 
-public abstract class Composite {
+public abstract class Activity {
   private String name;
 
-  public Composite(String name){
+  public Activity(String name){
     super();
     this.name = name;
   }
