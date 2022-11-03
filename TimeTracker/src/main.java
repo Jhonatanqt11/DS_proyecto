@@ -1,8 +1,18 @@
+import java.util.Set;
+
 public class main {
   private static void sampleTree() throws InterruptedException {
 
   }
   private static void countingTime() {
+
+
+
+  }
+ //private static void notSoSimpleTest() { ... }
+  public static void main(String[] args){
+    System.out.println("Start of test");
+
     Project root = new Project("root");
     Task transportation = new Task("transportation");
     Project softwareDesign = new Project("software design");
@@ -25,7 +35,6 @@ public class main {
     timeTracker.addActivity(readHandout);
     timeTracker.addActivity(firstMilestone);
 
-
     transportation.start();
     try {
       Thread.sleep(6000);
@@ -38,14 +47,14 @@ public class main {
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
+
     firstList.start();
     try {
       Thread.sleep(6000);
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
-    firstList.stop();
-    /*secondList.start();
+    secondList.start();
     try {
       Thread.sleep(4000);
     } catch (InterruptedException e) {
@@ -69,13 +78,11 @@ public class main {
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
-    transportation.stop();*/
+    transportation.stop();
 
 
-  }
- //private static void notSoSimpleTest() { ... }
-  public static void main(String[] args){
-    countingTime();
-// notSoSimpleTest();
+
+    System.out.println("End of test");
+    //System.exit(0);
   }
 }

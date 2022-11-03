@@ -31,17 +31,14 @@ public class Clock extends Observable {
   }
 
   public void startTimer(){
-    timer = new Timer();
+    timer = new Timer(true);
     TimerTask timerTask = new TimerTask() {
       @Override
       public void run() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
-        String timeString = time.format(formatter);
-        System.out.println(timeString);
         tick();
       }
     };
-    timer.scheduleAtFixedRate(timerTask,0,2000);
+    timer.scheduleAtFixedRate(timerTask,1500,2000);
   }
 
   public LocalDateTime getTime()

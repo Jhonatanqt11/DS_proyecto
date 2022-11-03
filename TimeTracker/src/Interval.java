@@ -25,7 +25,10 @@ public class Interval implements Observer {
     if (initialDate == null)
       initialDate = finalDate.minusSeconds(2);
     duration = Duration.between(initialDate,finalDate);
-
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+    String initialDateString = initialDate.format(formatter);
+    String finalDateString = finalDate.format(formatter);
+    System.out.println("interval:    " + initialDateString + "  " + finalDateString + "  " + duration.toString());
     task.update(initialDate, finalDate);
   }
 

@@ -24,6 +24,7 @@ public class Task extends Activity {
   public LocalDateTime getInitialDate() {return initialDate;}
   public LocalDateTime getFinalDate() {return finalDate;}
   public void start(){
+    System.out.println(getName() + " starts");
     Interval interval1 = new Interval(this);
     intervals.add(interval1);
     Clock.getInstance().addObserver(interval1);
@@ -31,6 +32,8 @@ public class Task extends Activity {
     //crear thread
   }
   public void stop(){
+    System.out.println(getName() + " stops");
+    Clock.getInstance().deleteObserver(intervals.get(intervals.size()-1));
     Clock.getInstance().stopTimer();
   }
 }
