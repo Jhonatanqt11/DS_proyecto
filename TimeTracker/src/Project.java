@@ -1,36 +1,33 @@
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.Duration;
 
-//Un proyecto puede estar frmado de otros proyectos y de una o mas tareas
 public class Project extends Activity {
 
-  private List<Activity> Composites;
+  private List<Activity> activities;
 
   public Project(String n) {
     super(n);
+    activities = new ArrayList<Activity>();
   }
 
-
-  /*IMPORTANTE:
-  TotalTime debe calcular el tiempo total de un proyecto con recursividad sumando el TiempoTotal de cada una de sus actividades, ya sean otros Proyectos o Tasks*/
-  public Duration TotalTime() {
-
-    Duration tempsTotal = Duration.ZERO;
-
-    for(int i=0; i<Composites.size(); i++)
+  public void totalTime() {
+    Duration duration1 = Duration.ZERO;
+    for(int i=0; i<activities.size(); i++)
     {
-      tempsTotal = tempsTotal.plus(Composites.get(i).TotalTime());
+      if(activities.get(i).getDuration() != null)
+        duration1 = duration1.plus(activities.get(i).getDuration());
     }
-
-    return tempsTotal;
+    duration = duration1;
   }
 
-  public void addActivity(Activity t) {
-    Composites.add(t);
+  public void addActivity(Activity activity) {
+    activity.setProject(this);
+    activities.add(activity);
   }
-
-  public boolean removeActivity(Activity t) {
-    return Composites.remove(t);
+  public boolean removeActivity(Activity activity) {
+    return activities.remove(activity);
     //Intento de if(*eliminado*) return true, if(*no eliminado*) return false
   }
 }
