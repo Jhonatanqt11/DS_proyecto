@@ -20,7 +20,7 @@ public class Clock extends Observable {
   private Clock()
   {
     time = LocalDateTime.now().minusSeconds(2);
-    timer = new Timer();//  Consequently we have to set the new interval duration to 2 seconds the initial date-time to 2 seconds before the first signal receive
+    //  Consequently we have to set the new interval duration to 2 seconds the initial date-time to 2 seconds before the first signal receive
   }
 
 
@@ -31,6 +31,7 @@ public class Clock extends Observable {
   }
 
   public void startTimer(){
+    timer = new Timer();
     TimerTask timerTask = new TimerTask() {
       @Override
       public void run() {

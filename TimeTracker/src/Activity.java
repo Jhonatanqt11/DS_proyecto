@@ -7,7 +7,7 @@ public abstract class Activity {
     super();
     this.name = name;
   }
-  public abstract Duration TotalTime();
+  public abstract void totalTime();
   public String getName(){
     return name;
   }

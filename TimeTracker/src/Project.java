@@ -7,13 +7,12 @@ public class Project extends Activity {
 
   public Project(String n) {
     super(n);
+    activities = new ArrayList<Activity>();
   }
 
-  public Duration TotalTime() {
-
-    Duration tempsTotal = Duration.ZERO;
-
-    for(int i=0; i<Composites.size(); i++)
+  public void totalTime() {
+    Duration duration1 = Duration.ZERO;
+    for(int i=0; i<activities.size(); i++)
     {
       tempsTotal = tempsTotal.plus(Composites.get(i).TotalTime());
     }

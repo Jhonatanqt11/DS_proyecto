@@ -1,4 +1,5 @@
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Task extends Activity {
-  private List<Interval> intervals = new ArrayList<Interval>();
-  private DateTimeFormatter initD;
-  private DateTimeFormatter finalD;
+  private List<Interval> intervals;
 
   public Task(String n){
     super(n);
@@ -20,7 +19,7 @@ public class Task extends Activity {
       Duration duration1 = Duration.between(intervals.get(i).getInitD(), intervals.get(i).getFinalD());
       duration=duration.plus(duration1);
     }
-    return duration;
+    duration = duration1;
   }
 
   public DateTimeFormatter getInitD() {return initD;}
@@ -32,10 +31,8 @@ public class Task extends Activity {
     Clock.getInstance().startTimer();
     //crear thread
   }
-  public void stop(String n){
-    if(name.equals(n)){
-      Clock.getInstance().stopTimer();
-    }
+  public void stop(){
+    Clock.getInstance().stopTimer();
   }
 
 }
