@@ -1,6 +1,7 @@
 import java.util.List;
 import java.time.Duration;
 
+//Un proyecto puede estar frmado de otros proyectos y de una o mas tareas
 public class Project extends Activity {
 
   private List<Activity> Composites;
@@ -9,6 +10,9 @@ public class Project extends Activity {
     super(n);
   }
 
+
+  /*IMPORTANTE:
+  TotalTime debe calcular el tiempo total de un proyecto con recursividad sumando el TiempoTotal de cada una de sus actividades, ya sean otros Proyectos o Tasks*/
   public Duration TotalTime() {
 
     Duration tempsTotal = Duration.ZERO;

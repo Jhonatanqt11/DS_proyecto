@@ -1,9 +1,12 @@
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 
 public class Task extends Activity {
   private List<Interval> intervals = new ArrayList<Interval>();
@@ -14,6 +17,11 @@ public class Task extends Activity {
     super(n);
     intervals = new ArrayList<Interval>();
   }
+
+
+  /*IMPORTANTE:
+  El TotalTime de una actividad es la suma de tiempo de cada uno de sus intervalos, calculado con la diferencia del tiempo de finalizaciond con la tiempo de iniciacion de cada intervalo usando java.time.Duration method
+  */
   public Duration TotalTime() {
     Duration duration = Duration.ZERO;
     for(int i = 0; i< intervals.size(); i++){

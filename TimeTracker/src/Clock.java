@@ -5,6 +5,9 @@ import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/*IMPORTANTE:
+ Interesa tener una unica instancia de reloj que "cuente" el paso del tiempo, se ha implementado el patron Singleton para que la instacia solo pueda ser creada des de la propia clase*/
 public class Clock extends Observable {
   private LocalDateTime time;
   private static Clock instance = null;
@@ -29,6 +32,8 @@ public class Clock extends Observable {
     notifyObservers(this);
   }
 
+  /*IMPORTANTE:
+   Se inicializa un Timer de una tarea */
   public void startTimer(){
     timer = new Timer();//  Consequently we have to set the new interval duration to 2 seconds the initial date-time to 2 seconds before the first signal receive
     TimerTask timerTask = new TimerTask() {
