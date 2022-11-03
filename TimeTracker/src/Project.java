@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.Duration;
 
 public class Project extends Activity {
 
-  private List<Activity> Composites;
+  private List<Activity> activities;
 
   public Project(String n) {
     super(n);
@@ -14,18 +16,18 @@ public class Project extends Activity {
     Duration duration1 = Duration.ZERO;
     for(int i=0; i<activities.size(); i++)
     {
-      tempsTotal = tempsTotal.plus(Composites.get(i).TotalTime());
+      if(activities.get(i).getDuration() != null)
+        duration1 = duration1.plus(activities.get(i).getDuration());
     }
-
-    return tempsTotal;
+    duration = duration1;
   }
 
-  public void addActivity(Activity t) {
-    Composites.add(t);
+  public void addActivity(Activity activity) {
+    activity.setProject(this);
+    activities.add(activity);
   }
-
-  public boolean removeActivity(Activity t) {
-    return Composites.remove(t);
+  public boolean removeActivity(Activity activity) {
+    return activities.remove(activity);
     //Intento de if(*eliminado*) return true, if(*no eliminado*) return false
   }
 }

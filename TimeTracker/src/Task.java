@@ -13,17 +13,16 @@ public class Task extends Activity {
     super(n);
     intervals = new ArrayList<Interval>();
   }
-  public Duration TotalTime() {
-    Duration duration = Duration.ZERO;
-    for(int i = 0; i< intervals.size(); i++){
-      Duration duration1 = Duration.between(intervals.get(i).getInitD(), intervals.get(i).getFinalD());
-      duration=duration.plus(duration1);
+  public void totalTime() {
+    Duration duration1 = Duration.ZERO;
+    for(int i = 0; i<intervals.size() ; i++){
+      duration1=duration1.plus(intervals.get(i).getDuration());
     }
     duration = duration1;
   }
 
-  public DateTimeFormatter getInitD() {return initD;}
-  public DateTimeFormatter getFinalD() {return finalD;}
+  public LocalDateTime getInitialDate() {return initialDate;}
+  public LocalDateTime getFinalDate() {return finalDate;}
   public void start(){
     Interval interval1 = new Interval(this);
     intervals.add(interval1);
@@ -34,5 +33,4 @@ public class Task extends Activity {
   public void stop(){
     Clock.getInstance().stopTimer();
   }
-
 }
