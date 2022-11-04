@@ -1,3 +1,6 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,11 +32,26 @@ public class Task extends Activity {
     intervals.add(interval1);
     Clock.getInstance().addObserver(interval1);
     Clock.getInstance().startTimer();
-    //crear thread
   }
   public void stop(){
     System.out.println(getName() + " stops");
     Clock.getInstance().deleteObserver(intervals.get(intervals.size()-1));
     Clock.getInstance().stopTimer();
+  }
+
+  @Override
+  public String takeClass() {
+    return "Task";
+  }
+
+  @Override
+  public JSONObject save() {
+    super.save();
+    JSONArray intervalsjson = new JSONArray();
+    for (Interval interval : intervals){
+      intervalsjson.put(interval.save());
+    }
+    tree.put("intervals",intervalsjson);
+    return tree;
   }
 }

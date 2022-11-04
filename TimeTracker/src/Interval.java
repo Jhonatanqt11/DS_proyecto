@@ -1,9 +1,13 @@
 
+import org.json.JSONObject;
+
+import java.io.FileWriter;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
+
 
 public class Interval implements Observer {
   private Task task;
@@ -34,5 +38,13 @@ public class Interval implements Observer {
 
   public Duration getDuration() {
     return duration;
+  }
+  public JSONObject save(){
+    JSONObject interval = new JSONObject();
+    interval.put("class","interval");
+    interval.put("initialDate",initialDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
+    interval.put("finalDate",finalDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
+    interval.put("duration",duration.toString());
+    return interval;
   }
 }

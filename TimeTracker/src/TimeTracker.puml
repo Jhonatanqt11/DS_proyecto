@@ -3,7 +3,7 @@
 
 skinparam classAttributeIconSize 0
 
-Project"activities 0..*"-up-|>"father 0,1"Activity
+Project"activities 0..*"-up-|>"project 0,1"Activity
 Task -up-|>Activity
 Project*--->Activity
 Task"task 1"*-->"intervals 0..*"Interval
@@ -24,34 +24,35 @@ Abstract Observable{
 
 }
 class Project {
-    -Activities[] : Activity[0..*]
-
-    +TotalTime() : DateTime
-    +addActivity(t : Activity)
-    +removeActivity(t : Activity)
+    +TotalTime()
+    +addActivity(activity : Activity)
+    +removeActivity(activity : Activity)
 }
 class Task{
-    +TotalTime() : DateTime
-    +start() : void
+    +TotalTime()
+    +start()
+    +stop()
 }
 
 abstract Activity{
     #name : String
-    #father : Project {0..1}
-    #initialDate : DateTime
-    #finalDate : DateTime
-    #duration : Int
+    #initialDate : LocalDateTime
+    #finalDate : LocalDateTime
+    #duration : Duration
 
-    +TotalTime() : DateTime
+    +TotalTime()
+    +update(initialDate: LocalDateTime, finalDate: LocalDateTime)
 }
 class Interval{
-    -initialDate : DateTime
-    -finalDate : DateTime
+    -initialDate : LocalDateTime
+    -finalDate : LocalDateTime
     -duration : Duration
+
 }
 class Clock{
     -timer : Timer
-    -dateTime : DateTime
+    -dateTime : LocalDateTime
+    -instance = null : Clock
     +startTimer()
     +stopTimer()
     -tick()

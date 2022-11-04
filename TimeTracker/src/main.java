@@ -1,4 +1,4 @@
-import java.util.Set;
+import java.io.IOException;
 
 public class main {
   private static void sampleTree() throws InterruptedException {
@@ -10,7 +10,7 @@ public class main {
 
   }
  //private static void notSoSimpleTest() { ... }
-  public static void main(String[] args){
+  public static void main(String[] args) throws IOException {
     System.out.println("Start of test");
 
     Project root = new Project("root");
@@ -79,9 +79,7 @@ public class main {
       throw new RuntimeException(e);
     }
     transportation.stop();
-
-
-
+    root.saver("save.txt");
     System.out.println("End of test");
     //System.exit(0);
   }
