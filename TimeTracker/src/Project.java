@@ -13,6 +13,9 @@ public class Project extends Activity {
     activities = new ArrayList<Activity>();
   }
 
+
+  /*el total time ha de calcular el tiempo total empleado en cada proyecto
+   * el tiempo de un proyecto es un sumatorio de los tiempos de sus actividades, en caso de no haber ninguna actividad en el proyecto se devolverá un valor nulo*/
   public void totalTime() {
     Duration duration1 = Duration.ZERO;
     for(int i=0; i<activities.size(); i++)
@@ -22,6 +25,7 @@ public class Project extends Activity {
     }
     duration = duration1;
   }
+
 
   public void addActivity(Activity activity) {
     activity.setProject(this);
@@ -37,6 +41,7 @@ public class Project extends Activity {
     return "Project";
   }
   public JSONObject save(){
+    //Crea un JSONArray para guardar todos los JSONObject de cada elemento de la lista. Esto sirve para poder guardas la lista de Activities.
     super.save();
     JSONArray list = new JSONArray();
     for(Activity activity : activities){

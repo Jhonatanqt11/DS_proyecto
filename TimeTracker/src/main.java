@@ -1,16 +1,7 @@
 import java.io.IOException;
 
 public class main {
-  private static void sampleTree() throws InterruptedException {
-
-  }
-  private static void countingTime() {
-
-
-
-  }
- //private static void notSoSimpleTest() { ... }
-  public static void main(String[] args) throws IOException {
+  private static void countingTime() throws IOException {
     System.out.println("Start of test");
 
     Project root = new Project("root");
@@ -81,6 +72,10 @@ public class main {
     transportation.stop();
     root.saver("save.txt");
     System.out.println("End of test");
-    //System.exit(0);
+  }
+ //private static void notSoSimpleTest() { ... }
+  public static void main(String[] args) throws IOException {
+
+    countingTime();
   }
 }

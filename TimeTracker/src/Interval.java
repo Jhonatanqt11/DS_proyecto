@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
 
+import static java.lang.Math.round;
+
 
 public class Interval implements Observer {
   private Task task;
@@ -22,6 +24,7 @@ public class Interval implements Observer {
   }
   public LocalDateTime getInitialDate() {return initialDate;}
   public LocalDateTime getFinalDate() {return finalDate;}
+  //cada vez que el reloj haga un tick, se llamará al update de los intervalos que lo estén observando. Éste actualizará su fecha final y la duración, imprimirá sus datos en pantalla y llamará al update recursivo de su Task padre.
   @Override
   public void update(Observable observable, Object clock){
     Clock clockInterval = (Clock) clock;
@@ -32,7 +35,7 @@ public class Interval implements Observer {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
     String initialDateString = initialDate.format(formatter);
     String finalDateString = finalDate.format(formatter);
-    System.out.println("interval:    " + initialDateString + "  " + finalDateString + "  " + duration.toString());
+    System.out.println("interval:                  " + initialDateString + "  " + finalDateString + "  " + round((double)duration.toMillis()/1000));
     task.update(initialDate, finalDate);
   }
 
