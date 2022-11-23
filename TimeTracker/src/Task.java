@@ -2,33 +2,29 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+
+//Task is the leaf class of the Activity tree. It is in charge of starting and stopping the intervals.
 
 public class Task extends Activity {
-  private List<Interval> intervals;
+  private final List<Interval> intervals;
 
   public Task(String n){
     super(n);
-    intervals = new ArrayList<Interval>();
+    intervals = new ArrayList<>();
   }
   public void totalTime() {
-    //Calcula el tiempo de recorriendo la lista y sumando el tiempo de cada elemento de ella.
+    //Calculate the time by going through the list and adding the time of each element of the list.
     Duration duration1 = Duration.ZERO;
-    for(int i = 0; i<intervals.size() ; i++){
-      duration1=duration1.plus(intervals.get(i).getDuration());
+    for(Interval interval : intervals){
+      duration1=duration1.plus(interval.getDuration());
     }
     duration = duration1;
   }
 
-  public LocalDateTime getInitialDate() {return initialDate;}
-  public LocalDateTime getFinalDate() {return finalDate;}
   public void start(){
-    //Cada vez que se hace un start a la task, se crea un intervalo y al clock asigna como observer este nuevo intervalo, ademas esta función inicia el clock.
+    //Every time the task is started, an interval is created and the clock assigns this new interval as an Observer, also this function starts the clock.
     System.out.println(getName() + " starts");
     Interval interval1 = new Interval(this);
     intervals.add(interval1);
@@ -36,7 +32,7 @@ public class Task extends Activity {
     Clock.getInstance().startTimer();
   }
 
-  //Cuando se quiera parar de trabajar en la tarea, se llamarà a stop() que quitará el Observer del intervalo en que se estaba trabajando y parará el contador del reloj
+  //When you want to stop working on the task, stop() will be called, which will remove the Observer from the interval in which it was working and will stop the clock counter.
   public void stop(){
     System.out.println(getName() + " stops");
     Clock.getInstance().deleteObserver(intervals.get(intervals.size()-1));
@@ -50,13 +46,18 @@ public class Task extends Activity {
 
   @Override
   public JSONObject save() {
-    //Crea un JSONArray para guardar todos los JSONObject de cada elemento de la lista. Esto sirve para poder guardas la lista de intervalos.
+    //Create a JSONArray to hold all the JSONObjects for each list item. This is used to save the list of intervals.
     super.save();
-    JSONArray intervalsjson = new JSONArray();
+    JSONArray intervalsJson = new JSONArray();
     for (Interval interval : intervals){
-      intervalsjson.put(interval.save());
+      intervalsJson.put(interval.save());
     }
-    tree.put("intervals",intervalsjson);
+    tree.put("intervals",intervalsJson);
     return tree;
+  }
+
+  @Override
+  public void acceptVisitor(Visitor visitor) {
+    visitor.visitTask(this);
   }
 }

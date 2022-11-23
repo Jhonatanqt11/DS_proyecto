@@ -1,53 +1,57 @@
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.time.Duration;
 
 import org.json.*;
 
+//Project is a node of the Activity tree. It can contain Tasks or other Projects.
+
 public class Project extends Activity {
 
-  private List<Activity> activities;
+  private final List<Activity> activities;
+
   public Project(String n) {
     super(n);
-    activities = new ArrayList<Activity>();
+    activities = new ArrayList<>();
   }
 
 
-  /*el total time ha de calcular el tiempo total empleado en cada proyecto
-   * el tiempo de un proyecto es un sumatorio de los tiempos de sus actividades, en caso de no haber ninguna actividad en el proyecto se devolverá un valor nulo*/
+  /*the total time has to calculate the total time spent on each project
+   * the time of a project is a sum of the times of its activities, if there is no activity in the project a null value will be returned*/
   public void totalTime() {
     Duration duration1 = Duration.ZERO;
-    for(int i=0; i<activities.size(); i++)
-    {
-      if(activities.get(i).getDuration() != null)
-        duration1 = duration1.plus(activities.get(i).getDuration());
+    for (Activity activity : activities) {
+      if (activity.getDuration() != null)
+        duration1 = duration1.plus(activity.getDuration());
     }
     duration = duration1;
   }
-
+  public List<Activity> getActivities(){return activities;}
 
   public void addActivity(Activity activity) {
     activity.setProject(this);
     activities.add(activity);
   }
 
-  public boolean removeActivity(Activity activity) {
-    return activities.remove(activity);
-  }
-
   @Override
   public String takeClass() {
     return "Project";
   }
-  public JSONObject save(){
-    //Crea un JSONArray para guardar todos los JSONObject de cada elemento de la lista. Esto sirve para poder guardas la lista de Activities.
+
+  public JSONObject save() {
+    //Create a JSONArray to hold all the JSONObjects for each list item. This is used to save the list of Activities.
     super.save();
     JSONArray list = new JSONArray();
-    for(Activity activity : activities){
+    for (Activity activity : activities) {
       list.put(activity.save());
     }
-    tree.put("activities",list);
+    tree.put("activities", list);
     return tree;
+  }
+
+  @Override
+  public void acceptVisitor(Visitor visitor) {
+    visitor.visitProject(this);
   }
 }

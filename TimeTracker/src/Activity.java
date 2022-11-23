@@ -1,33 +1,42 @@
-import org.json.JSONArray;
+
 import org.json.JSONObject;
+
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Array;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.Math.*;
 
+//Activity is the abstract class from which Task and Project classes will inherit. It has the attributes and methods that they share. With this class we are implementing the Composite pattern.
+
 public abstract class Activity {
-  protected String name;
+  protected final String name;
   protected LocalDateTime initialDate;
   protected LocalDateTime finalDate;
   protected Duration duration;
   protected Activity project;
-  protected JSONObject tree;
+  protected final JSONObject tree;
+  protected List<String> tags;
 
   public Activity(String name){
     this.name = name;
     this.initialDate = null;
     this.project = null;
     tree = new JSONObject();
+    this.tags = new ArrayList<>();
   }
   public abstract void totalTime();
   public String getName(){
     return name;
   }
 
-  //Éste es el update recursivo. Actualiza los valores de la fecha final y la duración, imprimie los datos del objeto por pantalla y llama al update de su padre de forma recursiva hasta llegar a la raíz.
+  //This is the recursive update. Updates the end date and duration values, prints the object's data to the screen, and calls its parent's update recursively until it reaches the root.
   public void update(LocalDateTime initialDate, LocalDateTime finalDate){
     if (this.initialDate == null)
     {
@@ -53,7 +62,7 @@ public abstract class Activity {
   }
   public abstract String takeClass();
   public JSONObject save(){
-    //Sirve para guardar los atributos en un txt, en caso de que las fechas o la duración esten en null, se guarda un JSONObject.NULL.
+    //It is used to save the attributes in a txt, in case the dates or the duration are null, a JSONObject.NULL is saved.
     tree.put("name",name);
     tree.put("class",takeClass());
     if(initialDate == null){
@@ -74,9 +83,18 @@ public abstract class Activity {
     return tree;
   }
   public void saver(String filename) throws IOException {
-    //Des del root se ha de llamar esta función, ya que recorre el arbol desde la posición actual hasta las hojas del arbol de forma recursiva.
+    //This function must be called from root, since it recursively traverses the tree from the current position to the leaves of the tree.
     FileWriter file = new FileWriter(filename);
     file.write(save().toString());
     file.close();
   }
+
+  public void setTags(List<String> tags) {
+
+    this.tags = tags;
+  }
+  public List<String> getTags() {
+    return tags;
+  }
+  public abstract void acceptVisitor(Visitor visitor);
 }

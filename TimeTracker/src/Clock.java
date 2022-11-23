@@ -1,9 +1,9 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+
+//Clock is the class that has the Observable role. It counts the time and calls to the Observer update function on every tick(). It implements the Singleton pattern.
 
 public class Clock extends Observable {
   private LocalDateTime time;
@@ -20,7 +20,7 @@ public class Clock extends Observable {
   private Clock()
   {
     time = LocalDateTime.now().minusSeconds(2);
-    //  Consequently we have to set the new interval duration to 2 seconds the initial date-time to 2 seconds before the first signal receive
+    // Consequently we have to set the new interval duration to 2 seconds the initial date-time to 2 seconds before the first signal receive
   }
 
 

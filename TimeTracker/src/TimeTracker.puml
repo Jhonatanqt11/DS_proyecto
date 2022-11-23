@@ -3,10 +3,10 @@
 
 skinparam classAttributeIconSize 0
 
-Project"activities 0..*"-up-|>"project 0,1"Activity
+Project"activities 0...*"-up-|>"project 0,1"Activity
 Task -up-|>Activity
 Project*--->Activity
-Task"task 1"*-->"intervals 0..*"Interval
+Task"task 1"*-->"intervals 0...*"Interval
 
 package java.util{
 Observable o--up->Observer : Observers*
