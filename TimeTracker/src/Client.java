@@ -12,21 +12,21 @@ public class Client {
     Project softwareDesign = new Project("software design");
     Project softwareTesting = new Project("software testing");
     Project databases = new Project("databases");
-    Project problems = new Project("problems");
-    Project timeTracker = new Project("time tracker");
-    Task firstList = new Task("first list");
-    Task secondList = new Task("second list");
-    Task readHandout = new Task("read handout");
-    Task firstMilestone = new Task("first milestone");
     root.addActivity(transportation);
     root.addActivity(softwareDesign);
     root.addActivity(softwareTesting);
     root.addActivity(databases);
+    Project problems = new Project("problems");
     softwareDesign.addActivity(problems);
+    Project timeTracker = new Project("time tracker");
     softwareDesign.addActivity(timeTracker);
+    Task firstList = new Task("first list");
     problems.addActivity(firstList);
+    Task secondList = new Task("second list");
     problems.addActivity(secondList);
+    Task readHandout = new Task("read handout");
     timeTracker.addActivity(readHandout);
+    Task firstMilestone = new Task("first milestone");
     timeTracker.addActivity(firstMilestone);
 
     transportation.start();
@@ -76,50 +76,63 @@ public class Client {
     root.saver("save.txt");
     System.out.println("End of test");
   }
- //private static void notSoSimpleTest() { ... }
- private static void searchTag(){
-   Project root = new Project("root");
-   Task transportation = new Task("transportation");
-   Project softwareDesign = new Project("software design");
-   Project softwareTesting = new Project("software testing");
-   Project databases = new Project("databases");
-   Project problems = new Project("problems");
-   Project timeTracker = new Project("time tracker");
-   Task firstList = new Task("first list");
-   Task secondList = new Task("second list");
-   Task readHandout = new Task("read handout");
-   Task firstMilestone = new Task("first milestone");
-   root.addActivity(transportation);
-   root.addActivity(softwareDesign);
-   root.addActivity(softwareTesting);
-   root.addActivity(databases);
-   softwareDesign.addActivity(problems);
-   softwareDesign.addActivity(timeTracker);
-   problems.addActivity(firstList);
-   problems.addActivity(secondList);
-   timeTracker.addActivity(readHandout);
-   timeTracker.addActivity(firstMilestone);
 
-   List <String> tag = Arrays.asList("java","flutter");
-   softwareDesign.setTags(tag);
-   tag = Arrays.asList("c++","Java","python");
-   softwareTesting.setTags(tag);
-   tag = Arrays.asList("SQL","python","C++");
-   databases.setTags(tag);
-   tag = Arrays.asList("java");
-   firstList.setTags(tag);
-   tag = Arrays.asList("Dart");
-   secondList.setTags(tag);
-   tag = Arrays.asList("Java","IntelliJ");
-   firstMilestone.setTags(tag);
+  private static void searchTag() {
+    Project root = new Project("root");
+    Task transportation = new Task("transportation");
+    Project softwareDesign = new Project("software design");
+    Project softwareTesting = new Project("software testing");
+    Project databases = new Project("databases");
+    root.addActivity(transportation);
+    root.addActivity(softwareDesign);
+    root.addActivity(softwareTesting);
+    root.addActivity(databases);
+    Project problems = new Project("problems");
+    softwareDesign.addActivity(problems);
+    Project timeTracker = new Project("time tracker");
+    softwareDesign.addActivity(timeTracker);
+    Task firstList = new Task("first list");
+    problems.addActivity(firstList);
+    Task secondList = new Task("second list");
+    problems.addActivity(secondList);
+    Task readHandout = new Task("read handout");
+    timeTracker.addActivity(readHandout);
+    Task firstMilestone = new Task("first milestone");
+    timeTracker.addActivity(firstMilestone);
 
-   Visitor visitor = new SearchByTag("c++");
-   root.acceptVisitor(visitor);
-   visitor.printResult();
+    List<String> tag = Arrays.asList("java", "flutter");
+    softwareDesign.setTags(tag);
+    tag = Arrays.asList("c++", "Java", "python");
+    softwareTesting.setTags(tag);
+    tag = Arrays.asList("SQL", "python", "C++");
+    databases.setTags(tag);
+    tag = List.of("java");
+    firstList.setTags(tag);
+    tag = List.of("Dart");
+    secondList.setTags(tag);
+    tag = Arrays.asList("Java", "IntelliJ");
+    firstMilestone.setTags(tag);
+
+    Visitor testVisitor1 = new SearchByTag("java");
+    root.acceptVisitor(testVisitor1);
+    testVisitor1.printResult();
+    Visitor testVisitor2 = new SearchByTag("JAVA");
+    root.acceptVisitor(testVisitor2);
+    testVisitor2.printResult();
+    Visitor testVisitor3 = new SearchByTag("intellij");
+    root.acceptVisitor(testVisitor3);
+    testVisitor3.printResult();
+    Visitor testVisitor4 = new SearchByTag("C++");
+    root.acceptVisitor(testVisitor4);
+    testVisitor4.printResult();
+    Visitor testVisitor5 = new SearchByTag("python");
+    root.acceptVisitor(testVisitor5);
+    testVisitor5.printResult();
  }
-  public static void main(String[] args) throws IOException {
 
+  public static void main(String[] args) throws IOException {
     countingTime();
     searchTag();
   }
+
 }

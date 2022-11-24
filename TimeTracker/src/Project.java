@@ -1,18 +1,16 @@
-
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.Duration;
-
-
-import org.json.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.json.JSONArray;
+import org.json.JSONObject;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 //Project is a node of the Activity tree. It can contain Tasks or other Projects.
 
 public class Project extends Activity {
 
-  static Logger logger = LoggerFactory.getLogger("Project");
+  //static Logger logger = LoggerFactory.getLogger("Project");
 
   private final List<Activity> activities;
 
@@ -27,12 +25,16 @@ public class Project extends Activity {
   public void totalTime() {
     Duration duration1 = Duration.ZERO;
     for (Activity activity : activities) {
-      if (activity.getDuration() != null)
+      if (activity.getDuration() != null) {
         duration1 = duration1.plus(activity.getDuration());
+      }
     }
     duration = duration1;
   }
-  public List<Activity> getActivities(){return activities;}
+
+  public List<Activity> getActivities() {
+    return activities;
+  }
 
   public void addActivity(Activity activity) {
     activity.setProject(this);
