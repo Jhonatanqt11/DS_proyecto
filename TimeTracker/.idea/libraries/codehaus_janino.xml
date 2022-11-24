@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="codehaus.janino" type="repository">
+    <properties maven-id="org.codehaus.janino:janino:2.5.16" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/janino/janino/2.5.16/janino-2.5.16.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

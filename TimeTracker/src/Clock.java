@@ -1,3 +1,7 @@
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
@@ -6,6 +10,7 @@ import java.util.TimerTask;
 //Clock is the class that has the Observable role. It counts the time and calls to the Observer update function on every tick(). It implements the Singleton pattern.
 
 public class Clock extends Observable {
+  static Logger Logger = LoggerFactory.getLogger("Clock");
   private LocalDateTime time;
   private static Clock instance = null;
   private Timer timer;

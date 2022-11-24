@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Client {
+
   private static void countingTime() throws IOException {
     System.out.println("Start of test");
 
@@ -114,10 +115,11 @@ public class Client {
 
    Visitor visitor = new SearchByTag("c++");
    root.acceptVisitor(visitor);
-   System.out.println(visitor.getResult());
+   visitor.printResult();
  }
   public static void main(String[] args) throws IOException {
-    //countingTime();
+
+    countingTime();
     searchTag();
   }
 }

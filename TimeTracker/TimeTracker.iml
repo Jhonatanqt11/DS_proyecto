@@ -8,6 +8,10 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="eduworks.json.ld" level="project" />
-    <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="j" level="project" />
+    <orderEntry type="library" name="ch.qos.logback.classic" level="project" />
+    <orderEntry type="library" name="slf4j.ext" level="project" />
+    <orderEntry type="library" name="ch.qos.logback.core" level="project" />
+    <orderEntry type="library" name="codehaus.janino" level="project" />
   </component>
 </module>

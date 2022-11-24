@@ -1,9 +1,18 @@
+
+
+
+//import ch.qos.logback.classic.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchByTag implements Visitor{
   private String tag;
-  List<Activity> result;
+  private List<Activity> result;
+  static Logger logger = LoggerFactory.getLogger("SearchByTag");
+
 
   SearchByTag(String tag){
     this.tag = tag;
@@ -32,5 +41,9 @@ public class SearchByTag implements Visitor{
   }
   
   @Override
-  public List<Activity> getResult() {return result;}
+  public void printResult() {
+    for(Activity activity : result){
+      logger.info(activity.getName());
+    }
+  }
 }

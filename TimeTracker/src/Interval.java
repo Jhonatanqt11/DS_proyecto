@@ -1,10 +1,15 @@
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.json.JSONObject;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 import java.util.Observer;
+
+
 
 import static java.lang.Math.round;
 
@@ -15,10 +20,12 @@ public class Interval implements Observer {
   private LocalDateTime initialDate;
   private LocalDateTime finalDate;
   private Duration duration;
+  static Logger logger= LoggerFactory.getLogger("Interval");
 
   public Interval(Task t){
     task = t;
     initialDate = null;
+
 
   }
   //Every time the clock ticks, the update of the intervals that are watching it will be called. It will update its end date and duration, print its data to the screen, and call the recursive update of its Task parent.
@@ -32,7 +39,7 @@ public class Interval implements Observer {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
     String initialDateString = initialDate.format(formatter);
     String finalDateString = finalDate.format(formatter);
-    System.out.println("interval:                  " + initialDateString + "  " + finalDateString + "  " + round((double)duration.toMillis()/1000));
+    logger.info( "interval: " + initialDateString + "  " + finalDateString + "  " + round((double)duration.toMillis()/1000));
     task.update(initialDate, finalDate);
   }
 

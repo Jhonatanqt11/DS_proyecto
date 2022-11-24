@@ -7,6 +7,7 @@ Project"activities 0...*"-up-|>"project 0,1"Activity
 Task -up-|>Activity
 Project*--->Activity
 Task"task 1"*-->"intervals 0...*"Interval
+SearchByTag --|> Visitor
 
 package java.util{
 Observable o--up->Observer : Observers*
@@ -23,15 +24,28 @@ Abstract Observable{
     +notifyObservers()
 
 }
+
+Interface Visitor{
+    +visitProject(project : Project)
+    +visitTask(task : Task)
+    +visitInterval(interval : Interval)
+    +printResult()
+
+}
+
 class Project {
     +TotalTime()
     +addActivity(activity : Activity)
     +removeActivity(activity : Activity)
+    +takeClass() : String
 }
 class Task{
     +TotalTime()
     +start()
     +stop()
+    +takeClass() : String
+    +save() : JSONObject
+
 }
 
 abstract Activity{
@@ -42,11 +56,18 @@ abstract Activity{
 
     +TotalTime()
     +update(initialDate: LocalDateTime, finalDate: LocalDateTime)
+    +takeClass() : String
+    +save() : JSONObject
+    +saver(filename : String)
+
+
 }
 class Interval{
     -initialDate : LocalDateTime
     -finalDate : LocalDateTime
     -duration : Duration
+
+    +save() : JSONObject
 
 }
 class Clock{
@@ -58,5 +79,15 @@ class Clock{
     -tick()
 }
 
+class SearchByTag{
+    -tag : String
+    -result : List<Activity>
+    +logger : Logger
+
+    -visitProject(project : Project)
+    -visitTask(task : Task)
+    -visitInterval(interval : Interval)
+    -printResult()
+}
 
 @enduml

@@ -1,21 +1,25 @@
 
-import org.json.JSONObject;
+//import ch.qos.logback.classic.Logger;
 
+import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Array;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static java.lang.Math.*;
 
 //Activity is the abstract class from which Task and Project classes will inherit. It has the attributes and methods that they share. With this class we are implementing the Composite pattern.
 
 public abstract class Activity {
+  static Logger logger =LoggerFactory.getLogger("Activity");
   protected final String name;
   protected LocalDateTime initialDate;
   protected LocalDateTime finalDate;
@@ -47,7 +51,7 @@ public abstract class Activity {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
     String initialDateString = initialDate.format(formatter);
     String finalDateString = finalDate.format(formatter);
-    System.out.println("activity:  "+ name + "            " + initialDateString + "  " + finalDateString + "  " + round((double)duration.toMillis()/1000));
+    logger.info("activity:  "+ name + "            " + initialDateString + "  " + finalDateString + "  " + round((double)duration.toMillis()/1000));
     if(project != null) {
       project.update(initialDate, finalDate);
     }

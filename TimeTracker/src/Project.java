@@ -3,11 +3,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.Duration;
 
+
 import org.json.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //Project is a node of the Activity tree. It can contain Tasks or other Projects.
 
 public class Project extends Activity {
+
+  static Logger logger = LoggerFactory.getLogger("Project");
 
   private final List<Activity> activities;
 

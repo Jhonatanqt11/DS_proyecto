@@ -5,10 +5,15 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+//import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 //Task is the leaf class of the Activity tree. It is in charge of starting and stopping the intervals.
 
 public class Task extends Activity {
   private final List<Interval> intervals;
+  static Logger logger = LoggerFactory.getLogger("Task");
 
   public Task(String n){
     super(n);
@@ -25,7 +30,7 @@ public class Task extends Activity {
 
   public void start(){
     //Every time the task is started, an interval is created and the clock assigns this new interval as an Observer, also this function starts the clock.
-    System.out.println(getName() + " starts");
+    logger.info( getName() + " starts");
     Interval interval1 = new Interval(this);
     intervals.add(interval1);
     Clock.getInstance().addObserver(interval1);
@@ -34,7 +39,7 @@ public class Task extends Activity {
 
   //When you want to stop working on the task, stop() will be called, which will remove the Observer from the interval in which it was working and will stop the clock counter.
   public void stop(){
-    System.out.println(getName() + " stops");
+    logger.info( getName() + " stops");
     Clock.getInstance().deleteObserver(intervals.get(intervals.size()-1));
     Clock.getInstance().stopTimer();
   }
