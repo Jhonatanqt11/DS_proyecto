@@ -32,7 +32,7 @@
         </encoder>
         <file>test.html</file>
     </appender>
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="Console"/>
         <!--<appender-ref ref="FILE"/>-->
     </root>

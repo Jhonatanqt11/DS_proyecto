@@ -26,7 +26,9 @@ public class Interval implements Observer {
     initialDate = null;
   }
 
-  //Every time the clock ticks, the update of the intervals that are watching it will be called. It will update its end date and duration, print its data to the screen, and call the recursive update of its Task parent.
+  //Every time the clock ticks, the update of the intervals that are watching it will be called.
+  // It will update its end date and duration, print its data to the screen,
+  // and call the recursive update of its Task parent.
   @Override
   public void update(Observable observable, Object clock) {
     Clock clockInterval = (Clock) clock;
@@ -38,7 +40,8 @@ public class Interval implements Observer {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
     String initialDateString = initialDate.format(formatter);
     String finalDateString = finalDate.format(formatter);
-    logger.info("interval: " + initialDateString + "  " + finalDateString + "  " + round((double) duration.toMillis() / 1000));
+    logger.info("interval: " + initialDateString + "  " + finalDateString
+        + "  " + round((double) duration.toMillis() / 1000));
     task.update(initialDate, finalDate);
   }
 
@@ -49,7 +52,8 @@ public class Interval implements Observer {
   public JSONObject save() {
     JSONObject interval = new JSONObject();
     interval.put("class", "interval");
-    interval.put("initialDate", initialDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
+    interval.put("initialDate",
+        initialDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
     interval.put("finalDate", finalDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
     interval.put("duration", duration.toString());
     return interval;

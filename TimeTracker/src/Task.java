@@ -34,7 +34,8 @@ public class Task extends Activity {
 
   public void start() {
 
-    //Every time the task is started, an interval is created and the clock assigns this new interval as an Observer, also this function starts the clock.
+    //Every time the task is started, an interval is created and the clock
+    // assigns this new interval as an Observer, also this function starts the clock.
 
     logger.info(getName() + " starts");
     Interval interval1 = new Interval(this);
@@ -42,7 +43,8 @@ public class Task extends Activity {
     Clock.getInstance().addObserver(interval1);
     Clock.getInstance().startTimer();
   } //When you want to stop working on the task, stop() will be called,
-  //which will remove the Observer from the interval in which it was working and will stop the clock counter.
+  //which will remove the Observer from the interval in which
+  // it was working and will stop the clock counter.
 
   public void stop() {
     logger.info(getName() + " stops");
@@ -58,7 +60,8 @@ public class Task extends Activity {
   @Override
   public JSONObject save() {
 
-    //Create a JSONArray to hold all the JSONObjects for each list item. This is used to save the list of intervals.
+    //Create a JSONArray to hold all the JSONObjects for each list item.
+    // This is used to save the list of intervals.
 
     super.save();
     JSONArray intervalsJson = new JSONArray();

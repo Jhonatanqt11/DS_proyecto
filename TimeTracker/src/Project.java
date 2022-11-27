@@ -21,7 +21,8 @@ public class Project extends Activity {
 
 
   /*the total time has to calculate the total time spent on each project
-   * the time of a project is a sum of the times of its activities, if there is no activity in the project a null value will be returned*/
+   * the time of a project is a sum of the times of its activities,
+   * if there is no activity in the project a null value will be returned*/
   public void totalTime() {
     Duration duration1 = Duration.ZERO;
     for (Activity activity : activities) {
@@ -47,7 +48,8 @@ public class Project extends Activity {
   }
 
   public JSONObject save() {
-    //Create a JSONArray to hold all the JSONObjects for each list item. This is used to save the list of Activities.
+    //Create a JSONArray to hold all the JSONObjects for each list item.
+    // This is used to save the list of Activities.
     super.save();
     JSONArray list = new JSONArray();
     for (Activity activity : activities) {
