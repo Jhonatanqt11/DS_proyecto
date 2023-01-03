@@ -1,4 +1,4 @@
-
+package core;
 
 interface Visitor {
   void visitProject(Project project);

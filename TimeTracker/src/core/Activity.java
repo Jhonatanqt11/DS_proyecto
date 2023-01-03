@@ -1,4 +1,4 @@
-
+package core;
 //import ch.qos.logback.classic.Logger;
 import static java.lang.Math.round;
 
@@ -22,12 +22,14 @@ import org.slf4j.LoggerFactory;
 public abstract class Activity {
   static final Logger logger = LoggerFactory.getLogger("Activity");
   protected final String name;
+  protected int id;
   protected LocalDateTime initialDate;
   protected LocalDateTime finalDate;
   protected Duration duration;
   protected Activity project;
   protected final JSONObject tree;
   protected List<String> tags;
+  protected  boolean active;
 
   public Activity(String name) {
     this.name = name;
@@ -35,14 +37,16 @@ public abstract class Activity {
     this.project = null;
     tree = new JSONObject();
     this.tags = new ArrayList<>();
+    this.id = Sequence.getUniqueId();
+    this.active = false;
+    this.duration = Duration.ZERO;
   }
 
   public abstract void totalTime();
 
-  public String getName() {
-    return name;
-  }
+  public String getName() {return name;}
 
+  protected int getId() {return id;}
   //This is the recursive update. Updates the end date and duration values, prints the object's data to the screen, and calls its parent's update recursively until it reaches the root
 
   public void update(LocalDateTime initialDate, LocalDateTime finalDate) {
@@ -75,6 +79,7 @@ public abstract class Activity {
     //It is used to save the attributes in a txt, in case the dates or the duration are null, a JSONObject.NULL is saved.
 
     tree.put("name", name);
+    tree.put("id", id);
     tree.put("class", takeClass());
     if (initialDate == null) {
       logger.warn("Initial Date is null");
@@ -93,6 +98,7 @@ public abstract class Activity {
     } else {
       tree.put("duration", duration.toString());
     }
+    tree.put("active", active);
     return tree;
   }
 
@@ -115,4 +121,21 @@ public abstract class Activity {
   }
 
   public abstract void acceptVisitor(Visitor visitor);
+  public abstract Activity findActivityById(int id);
+
+  protected static final DateTimeFormatter formatter =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+  public abstract JSONObject toJson(int depth); // added 16-dec-2022
+
+  protected void toJson(JSONObject json) {
+    json.put("id", id);
+    json.put("name", name);
+    json.put("initialDate", initialDate==null
+        ? JSONObject.NULL : formatter.format(initialDate));
+    json.put("finalDate", finalDate==null
+        ? JSONObject.NULL : formatter.format(finalDate));
+    json.put("duration", duration.toSeconds());
+  }
+
 }

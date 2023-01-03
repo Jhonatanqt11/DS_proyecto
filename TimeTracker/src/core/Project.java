@@ -1,3 +1,4 @@
+package core;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,5 +63,33 @@ public class Project extends Activity {
   @Override
   public void acceptVisitor(Visitor visitor) {
     visitor.visitProject(this);
+  }
+
+  @Override
+  public Activity findActivityById(int id) {
+    if(this.id == id)
+      return this;
+    else{
+      for (Activity activity : activities){
+        if (activity.findActivityById(id) != null)
+          return activity;
+      }
+      return null;
+    }
+  }
+  @Override
+  public JSONObject toJson(int depth) {
+    JSONObject json = new JSONObject();
+    json.put("class", "project");
+    super.toJson(json);
+    if (depth>0) {
+      JSONArray jsonActivities = new JSONArray();
+      for (Activity activity : activities) {
+        jsonActivities.put(activity.toJson(depth - 1));
+        // important: decrement depth
+      }
+      json.put("activities", jsonActivities);
+    }
+    return json;
   }
 }

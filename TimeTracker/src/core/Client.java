@@ -1,3 +1,4 @@
+package core;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -99,7 +100,7 @@ public class Client {
     timeTracker.addActivity(readHandout);
     Task firstMilestone = new Task("first milestone");
     timeTracker.addActivity(firstMilestone);
-
+    /*
     List<String> tag = Arrays.asList("java", "flutter");
     softwareDesign.setTags(tag);
     tag = Arrays.asList("c++", "Java", "python");
@@ -128,10 +129,14 @@ public class Client {
     Visitor testVisitor5 = new SearchByTag("python");
     root.acceptVisitor(testVisitor5);
     testVisitor5.printResult();
+     */
+    System.out.println(root.getId());
+    System.out.println(transportation.getId());
+    System.out.println(softwareDesign.getId());
  }
 
   public static void main(String[] args) throws IOException {
-    countingTime();
+    //countingTime();
     searchTag();
   }
 

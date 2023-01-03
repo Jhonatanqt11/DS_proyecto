@@ -1,4 +1,4 @@
-
+package core;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class Task extends Activity {
   private final List<Interval> intervals;
+  private boolean active;
   static final Logger logger = LoggerFactory.getLogger("Task");
 
   public Task(String n) {
@@ -62,9 +63,10 @@ public class Task extends Activity {
 
     //Create a JSONArray to hold all the JSONObjects for each list item.
     // This is used to save the list of intervals.
-
-    super.save();
     JSONArray intervalsJson = new JSONArray();
+    //intervalsJson.put("class", "task");
+    super.save();
+
     for (Interval interval : intervals) {
       intervalsJson.put(interval.save());
     }
@@ -76,4 +78,31 @@ public class Task extends Activity {
   public void acceptVisitor(Visitor visitor) {
     visitor.visitTask(this);
   }
+
+  @Override
+  public Activity findActivityById(int id) {
+    if (this.id == id)
+      return this;
+    else
+      return null;
+  }
+  @Override
+  public JSONObject toJson(int depth) {
+    // depth not used here
+    JSONObject json = new JSONObject();
+    json.put("class", "task");
+    super.toJson(json);
+    json.put("active", active);
+    if (depth>0) {
+      JSONArray jsonIntervals = new JSONArray();
+      for (Interval interval : intervals) {
+        jsonIntervals.put(interval.toJson());
+      }
+      json.put("intervals", jsonIntervals);
+    } else {
+      json.put("intervals", new JSONArray());
+    }
+    return json;
+  }
+
 }
