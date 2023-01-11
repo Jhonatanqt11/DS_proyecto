@@ -72,7 +72,7 @@ public class Project extends Activity {
     else{
       for (Activity activity : activities){
         if (activity.findActivityById(id) != null)
-          return activity;
+          return activity.findActivityById(id);
       }
       return null;
     }

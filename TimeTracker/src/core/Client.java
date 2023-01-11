@@ -74,8 +74,9 @@ public class Client {
       throw new RuntimeException(e);
     }
     transportation.stop();
-    root.saver("save.txt");
-    System.out.println("End of test");
+    root.findActivityById(5);
+    //root.saver("save.txt");
+    //System.out.println("End of test");
   }
 
   private static void searchTag() {
@@ -130,14 +131,15 @@ public class Client {
     root.acceptVisitor(testVisitor5);
     testVisitor5.printResult();
      */
+
     System.out.println(root.getId());
     System.out.println(transportation.getId());
     System.out.println(softwareDesign.getId());
  }
 
   public static void main(String[] args) throws IOException {
-    //countingTime();
-    searchTag();
+    countingTime();
+    //searchTag();
   }
 
 }

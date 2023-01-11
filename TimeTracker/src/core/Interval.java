@@ -23,12 +23,15 @@ public class Interval implements Observer {
   private Duration duration;
   private boolean active;
   static final Logger logger = LoggerFactory.getLogger("Interval");
+  private static final DateTimeFormatter formatter =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 
   public Interval(Task t) {
     task = t;
     initialDate = null;
     active = true;
-    id = 0;
+    id = Sequence.getUniqueId();
   }
 
   //Every time the clock ticks, the update of the intervals that are watching it will be called.
@@ -49,6 +52,7 @@ public class Interval implements Observer {
         + "  " + round((double) duration.toMillis() / 1000));
     task.update(initialDate, finalDate);
   }
+  public void stopActivate() {active = false;}
 
   public Duration getDuration() {
     return duration;
@@ -70,9 +74,10 @@ public class Interval implements Observer {
     JSONObject json = new JSONObject();
     json.put("class", "interval");
     json.put("id", id);
-    json.put("initialDate",
-        initialDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
-    json.put("finalDate", finalDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
+    json.put("initialDate", initialDate==null
+        ? JSONObject.NULL : formatter.format(initialDate));
+    json.put("finalDate", finalDate==null
+        ? JSONObject.NULL : formatter.format(finalDate));
     json.put("duration", duration.toSeconds());
     json.put("active", active);
     return json;

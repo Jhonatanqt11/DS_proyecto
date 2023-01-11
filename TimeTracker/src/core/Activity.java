@@ -31,6 +31,7 @@ public abstract class Activity {
   protected List<String> tags;
   protected  boolean active;
 
+
   public Activity(String name) {
     this.name = name;
     this.initialDate = null;

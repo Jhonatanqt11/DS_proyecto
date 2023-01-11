@@ -1,6 +1,7 @@
 package webserver;
 
 import core.Activity;
+import core.Project;
 import core.Task;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 // Based on
@@ -116,7 +118,7 @@ public class WebServer {
           int id = Integer.parseInt(tokens[1]);
           Activity activity = findActivityById(id);
           assert (activity!=null);
-          body = activity.toJson(2).toString();
+          body = activity.toJson(1).toString();
           break;
         }
         case "start": {
@@ -136,6 +138,17 @@ public class WebServer {
           task.stop();
           body = "{}";
           break;
+        }
+        case "addTask":{
+          int id = Integer.parseInt(tokens[1]);
+          Activity activity = findActivityById(id);
+          String name = tokens[2];
+          Task task = new Task(name);
+          if(tokens[3]!= null)
+            task.setTags(Arrays.asList(tokens[3]));
+          assert (activity!=null);
+          Project project = (Project) activity;
+          project.addActivity(task);
         }
         // TODO: add new task, project
         // TODO: edit task, project properties
