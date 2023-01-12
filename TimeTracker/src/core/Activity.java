@@ -26,7 +26,7 @@ public abstract class Activity {
   protected LocalDateTime initialDate;
   protected LocalDateTime finalDate;
   protected Duration duration;
-  protected Activity project;
+  protected Project project;
   protected final JSONObject tree;
   protected List<String> tags;
   protected  boolean active;
@@ -65,7 +65,7 @@ public abstract class Activity {
     }
   }
 
-  public void setProject(Activity project) {
+  public void setProject(Project project) {
     this.project = project;
   }
 

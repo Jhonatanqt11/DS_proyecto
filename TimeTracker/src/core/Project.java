@@ -82,6 +82,7 @@ public class Project extends Activity {
     JSONObject json = new JSONObject();
     json.put("class", "project");
     super.toJson(json);
+    json.put("active", active);
     if (depth>0) {
       JSONArray jsonActivities = new JSONArray();
       for (Activity activity : activities) {
@@ -91,5 +92,15 @@ public class Project extends Activity {
       json.put("activities", jsonActivities);
     }
     return json;
+  }
+  public void start(){
+    active = true;
+    if(project != null)
+      project.start();
+  }
+  public void stop(){
+    active = false;
+    if(project != null)
+      project.stop();
   }
 }

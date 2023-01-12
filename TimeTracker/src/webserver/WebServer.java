@@ -149,6 +149,19 @@ public class WebServer {
           assert (activity!=null);
           Project project = (Project) activity;
           project.addActivity(task);
+          break;
+        }
+        case "addProject":{
+          int id = Integer.parseInt(tokens[1]);
+          Activity activity = findActivityById(id);
+          String name = tokens[2];
+          Project project = new Project(name);
+          if(tokens[3]!= null)
+            project.setTags(Arrays.asList(tokens[3]));
+          assert (activity!=null);
+          Project projectActivity = (Project) activity;
+          projectActivity.addActivity(project);
+          break;
         }
         // TODO: add new task, project
         // TODO: edit task, project properties

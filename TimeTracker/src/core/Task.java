@@ -20,7 +20,6 @@ public class Task extends Activity {
   public Task(String n) {
     super(n);
     intervals = new ArrayList<>();
-    active = false;
   }
 
   public void totalTime() {
@@ -45,6 +44,7 @@ public class Task extends Activity {
     Clock.getInstance().addObserver(interval1);
     Clock.getInstance().startTimer();
     active = true;
+    project.start();
   } //When you want to stop working on the task, stop() will be called,
   //which will remove the Observer from the interval in which
   // it was working and will stop the clock counter.
@@ -55,6 +55,7 @@ public class Task extends Activity {
     Clock.getInstance().deleteObserver(intervals.get(intervals.size() - 1));
     Clock.getInstance().stopTimer();
     active = false;
+    project.stop();
   }
 
   @Override
